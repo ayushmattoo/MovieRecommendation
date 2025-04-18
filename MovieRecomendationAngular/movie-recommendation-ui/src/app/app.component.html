@@ -1,0 +1,27 @@
+<!-- FILE: src/app/app.component.html -->
+
+<header>
+  <!-- Application Title -->
+  <h1>Movie Recommender</h1>
+
+  <!-- Include the Movie Search Component -->
+  <!-- The selector 'app-movie-search' matches the selector defined
+       in your movie-search.component.ts file -->
+  <app-movie-search></app-movie-search>
+
+</header>
+
+<main>
+  <!-- Router Outlet -->
+  <!-- This is the placeholder where Angular will render the component
+       that matches the current URL route (e.g., SearchResultsComponent
+       when the URL is '/search', or MovieDetailsComponent when the
+       URL is '/movie/some-id'). -->
+  <router-outlet></router-outlet>
+
+</main>
+
+<footer>
+  <!-- Simple footer content -->
+  <p>Movie data provided by OMDb API.</p>
+</footer>

@@ -1,0 +1,65 @@
+<!-- File: src/app/pages/movie-details/movie-details.component.html -->
+
+<!-- Loading Indicator -->
+<div *ngIf="isLoading" class="loading">Loading movie details...</div>
+
+<!-- Error Message -->
+<div *ngIf="error && !isLoading" class="error-message">
+  Error: {{ error }}
+  <br>
+  <a routerLink="/search">Go back to search</a>
+</div>
+
+<!-- Movie Details Section (only shown if movie data exists and no error) -->
+<div *ngIf="movie && !isLoading && !error" class="movie-details-container">
+
+  <div class="poster">
+    <img [src]="getPosterUrl(movie.Poster)" [alt]="movie.Title + ' Poster'">
+  </div>
+
+  <div class="info">
+    <h1>{{ movie.Title }} <span class="year">({{ movie.Year }})</span></h1>
+
+    <div class="meta-info">
+      <span *ngIf="movie.Rated && movie.Rated !== 'N/A'">{{ movie.Rated }}</span>
+      <span *ngIf="movie.Runtime && movie.Runtime !== 'N/A'">{{ movie.Runtime }}</span>
+      <span *ngIf="movie.Genre">{{ movie.Genre }}</span>
+      <span *ngIf="movie.Released">{{ movie.Released }}</span>
+    </div>
+
+    <h3>Plot</h3>
+    <p class="plot">{{ movie.Plot }}</p>
+
+    <div class="credits">
+      <p *ngIf="movie.Director"><strong>Director:</strong> {{ movie.Director }}</p>
+      <p *ngIf="movie.Writer"><strong>Writer:</strong> {{ movie.Writer }}</p>
+      <p *ngIf="movie.Actors"><strong>Actors:</strong> {{ movie.Actors }}</p>
+    </div>
+
+    <div class="additional-info">
+       <p *ngIf="movie.Language"><strong>Language:</strong> {{ movie.Language }}</p>
+       <p *ngIf="movie.Country"><strong>Country:</strong> {{ movie.Country }}</p>
+       <p *ngIf="movie.Awards && movie.Awards !== 'N/A'"><strong>Awards:</strong> {{ movie.Awards }}</p>
+       <p *ngIf="movie.BoxOffice && movie.BoxOffice !== 'N/A'"><strong>Box Office:</strong> {{ movie.BoxOffice }}</p>
+    </div>
+
+
+    <div class="ratings" *ngIf="movie.Ratings && movie.Ratings.length > 0 || movie.imdbRating || movie.Metascore">
+      <h3>Ratings:</h3>
+      <ul>
+        <li *ngFor="let rating of movie.Ratings">{{ rating.Source }}: {{ rating.Value }}</li>
+        <li *ngIf="movie.Metascore && movie.Metascore !== 'N/A'">Metascore: {{ movie.Metascore }} / 100</li>
+        <li *ngIf="movie.imdbRating && movie.imdbRating !== 'N/A'">IMDb Rating: {{ movie.imdbRating }} / 10 <span *ngIf="movie.imdbVotes && movie.imdbVotes !== 'N/A'"> ({{ movie.imdbVotes }} votes)</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- Recommendations Section (only shown if details loaded successfully) -->
+<div *ngIf="movie && !isLoading && !error" class="recommendations-section">
+   <hr>
+   <!-- Use the Movie List component to display recommendations -->
+   <!-- Pass the recommendations array to the 'movies' input -->
+   <app-movie-list [movies]="recommendations" listTitle="Recommendations"></app-movie-list>
+</div>

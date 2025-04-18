@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "uRU/UdUM/kQnd1aOw7kJyggQlo5luGpsLMdj+h1/Uk8=",
+  "Source": "MovieRecomendationAPI",
+  "BasePath": "_content/MovieRecomendationAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

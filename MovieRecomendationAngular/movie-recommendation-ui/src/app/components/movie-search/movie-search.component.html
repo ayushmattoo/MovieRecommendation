@@ -1,0 +1,11 @@
+<!-- File: src/app/components/movie-search/movie-search.component.html -->
+<div class="search-container">
+    <input
+      type="text"
+      placeholder="Search for movies..."
+      [(ngModel)]="searchTerm"
+      (keyup.enter)="onSearch()"
+      aria-label="Search for movies"
+    />
+    <button (click)="onSearch()" [disabled]="!searchTerm.trim()">Search</button>
+  </div>

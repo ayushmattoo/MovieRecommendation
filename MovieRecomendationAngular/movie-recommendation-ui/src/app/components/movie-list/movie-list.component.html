@@ -1,0 +1,29 @@
+<!-- File: src/app/components/movie-list/movie-list.component.html -->
+
+<!-- Only display the title if one is provided -->
+<h2 *ngIf="listTitle">{{ listTitle }}</h2>
+
+<!-- Check if the movies array exists and has items -->
+<div class="movie-list-container" *ngIf="movies && movies.length > 0; else noMovies">
+  <!-- Loop through each movie in the input array -->
+  <div class="movie-card" *ngFor="let movie of movies">
+    <!-- Each card is a link to the movie details page -->
+    <a [routerLink]="['/movie', movie.imdbID]" [title]="movie.Title + ' (' + movie.Year + ')'">
+      <!-- Display poster, using default if 'N/A' -->
+      <img [src]="getPosterUrl(movie.Poster)" [alt]="movie.Title + ' Poster'" loading="lazy">
+      <div class="movie-info">
+        <!-- Display movie title -->
+        <h3>{{ movie.Title }}</h3>
+        <!-- Display movie year -->
+        <p>{{ movie.Year }}</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Template shown if the movies array is empty or null -->
+<ng-template #noMovies>
+   <!-- Optionally show a message if the list is empty, maybe depending on the title -->
+   <!-- <p *ngIf="!listTitle">No movies to display.</p> -->
+   <p *ngIf="listTitle === 'Recommendations'">No recommendations found.</p>
+</ng-template>

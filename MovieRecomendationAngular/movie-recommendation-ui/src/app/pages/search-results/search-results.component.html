@@ -1,0 +1,29 @@
+<!-- File: src/app/pages/search-results/search-results.component.html -->
+
+<!-- Display search term only if a search was actually performed -->
+<h1 *ngIf="searchTerm">Search Results for "{{ searchTerm }}"</h1>
+<h1 *ngIf="!searchTerm">Please enter a search term</h1>
+
+<!-- Loading Indicator -->
+<div *ngIf="isLoading" class="loading">Loading search results...</div>
+
+<!-- Error Message -->
+<div *ngIf="error && !isLoading" class="error-message">
+  Error: {{ error }}
+</div>
+
+<!-- Results Section -->
+<div *ngIf="!isLoading && !error">
+  <!-- Show total results count -->
+  <p *ngIf="searchTerm && totalResults > 0">{{ totalResults }} results found.</p>
+  <p *ngIf="searchTerm && totalResults === 0 && searchResults.length === 0">No results found for "{{searchTerm}}".</p>
+
+  <!-- Use the Movie List Component to display results -->
+  <!-- Pass the searchResults array to the 'movies' input of app-movie-list -->
+  <app-movie-list
+    [movies]="searchResults"
+    listTitle="" > <!-- Keep title empty or remove if not needed here -->
+  </app-movie-list>
+
+  <!-- TODO: Add pagination controls here if totalResults > 10 -->
+</div>
