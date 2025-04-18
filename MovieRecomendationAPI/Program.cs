@@ -39,8 +39,7 @@ builder.Services.AddHttpClient<OmdbService>((serviceProvider, client) =>
         throw new InvalidOperationException("OMDb BaseUrl is not configured in appsettings.json");
     }
     client.BaseAddress = new Uri(baseUrl);
-    // You could add default headers here if needed, e.g.:
-    // client.DefaultRequestHeaders.Add("Accept", "application/json");
+    
 });
 // OmdbService itself is automatically registered as transient because AddHttpClient<TClient> does it.
 
